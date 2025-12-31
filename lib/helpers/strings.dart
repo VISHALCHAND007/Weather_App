@@ -1,3 +1,4 @@
 class Strings {
-  static const appName = "Weather App";
+  static const appName = "Atmos";
+  static const userLocation = "userLocation";
 }

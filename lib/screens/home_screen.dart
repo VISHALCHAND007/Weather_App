@@ -20,6 +20,25 @@ class _HomeScreenState extends State<HomeScreen> {
   double? latitude;
   double? longitude;
   WeatherModel? _weather;
+  var isInit = false;
+
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if(!isInit) {
+      checkUserLocation();
+      isInit = true;
+    }
+  }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //     checkUserLocation();
+  //   });
+  // }
 
   void _saveTestCoordinates() async {
     final lat = 28.7041;
@@ -100,24 +119,16 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      checkUserLocation();
-    });
-  }
-
   void _fetchLocation() async {
     if (!mounted) return;
     setState(() {
       isLoading = true;
     });
-    final prefs = await SharedPreferences.getInstance();
     try {
+      final prefs = await SharedPreferences.getInstance();
       final helper = LocationHelper();
       await helper.requestPermission();
-      final _fetchLocation = await helper.getUserCoordinates();
+      final _fetchLocation = await helper.getUserCoordinatesMy();
       if (_fetchLocation != null) {
         latitude = _fetchLocation.latitude;
         longitude = _fetchLocation.longitude;
@@ -129,8 +140,8 @@ class _HomeScreenState extends State<HomeScreen> {
         fetchWeather();
       }
     } catch (error) {
-      print(error);
-      scaffoldMessenger.showSnackBar(SnackBar(content: Text("Error:: $error")));
+      print("error:: ${error.runtimeType}:: $error}");
+      scaffoldMessenger.showSnackBar(SnackBar(content: Text("Error:: $error"), showCloseIcon: true,));
     } finally {
       if (mounted) {
         setState(() {

@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (desc.contains("cloud") ||
         desc.contains("fog") ||
         desc.contains("mist")) {
-      return Colors.grey.shade400;
+      return Colors.grey.shade600;
     } else if (desc.contains("rain")) {
       return Colors.blueGrey;
     } else if (desc.contains("clear") || desc.contains("sun")) {
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (desc.contains("cloud") ||
         desc.contains("fog") ||
         desc.contains("mist")) {
-      return Colors.grey.shade300;
+      return Colors.grey.shade400;
     } else if (desc.contains("rain")) {
       return Colors.blueGrey.shade300;
     } else if (desc.contains("clear") || desc.contains("sun")) {

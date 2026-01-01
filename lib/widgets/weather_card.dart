@@ -47,33 +47,26 @@ class WeatherCard extends StatelessWidget {
             children: [
               DefSpacer(height: 30),
               Lottie.asset(_getAsset, height: 150, width: 150),
-              DefSpacer(),
+              DefSpacer(height: 5),
               Text(
                 weather.cityName,
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 24),
               ),
-              DefSpacer(),
+              Divider(),
+              DefSpacer(height: 5),
               Text(
-                "${weather.temperature.toStringAsFixed(2)} °C",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+                "Feels like: ${weather.feelsLike.toStringAsFixed(2)} °C",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              // DefSpacer(height: 1,),
+              Text(
+                "Temperature: ${weather.temperature.toStringAsFixed(2)} °C",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
               ),
               DefSpacer(),
               Text(weather.description, style: TextStyle(fontSize: 20)),
               DefSpacer(),
-              Row(
-                mainAxisAlignment: .spaceAround,
-                children: [
-                  Text(
-                    "Humidity: ${weather.humidity}%",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  Text(
-                    "Wind: ${weather.windSpeed} m/sec",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ],
-              ),
-              DefSpacer(),
+              Divider(),
               Row(
                 mainAxisAlignment: .spaceAround,
                 children: [
@@ -88,6 +81,34 @@ class WeatherCard extends StatelessWidget {
                     iconTint: Colors.deepPurpleAccent,
                     title: "Sunset",
                     time: convertTime(weather.sunset),
+                  ),
+                ],
+              ),
+              DefSpacer(),
+              Row(
+                mainAxisAlignment: .spaceAround,
+                children: [
+                  Text(
+                    "Humidity: ${weather.humidity}%",
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+                  ),
+                  Text(
+                    "Wind: ${weather.windSpeed} m/sec",
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+                  ),
+                ],
+              ),
+              // DefSpacer(),
+              Row(
+                mainAxisAlignment: .spaceAround,
+                children: [
+                  Text(
+                    "Min temp.: ${weather.minTemperature.toStringAsFixed(2)} °C",
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+                  ),
+                  Text(
+                    "Max temp.: ${weather.maxTemperature.toStringAsFixed(2)} °C",
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
                   ),
                 ],
               ),

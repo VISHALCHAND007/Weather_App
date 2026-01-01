@@ -15,6 +15,23 @@ class WeatherCard extends StatelessWidget {
     return intl.DateFormat("hh:mm a").format(date);
   }
 
+  String get _getAsset {
+    final description = weather.description;
+    var result = "assets/lottie/sunny.json";
+    if (description.contains("cloud")) {
+      result = "assets/lottie/cloudy.json";
+    } else if (description.contains("sun") || description.contains("clear")) {
+      result = "assets/lottie/sunny.json";
+    } else if (description.contains("rain")) {
+      result = "assets/lottie/rain.json";
+    } else if (description.contains("snow")) {
+      result = "assets/lottie/snowfall.json";
+    } else if (description.contains("fog") || description.contains("mist")) {
+      result = "assets/lottie/fog.json";
+    }
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -29,7 +46,7 @@ class WeatherCard extends StatelessWidget {
             mainAxisAlignment: .center,
             children: [
               DefSpacer(height: 30),
-              Lottie.asset("assets/lottie/sunny.json", height: 150, width: 150),
+              Lottie.asset(_getAsset, height: 150, width: 150),
               DefSpacer(),
               Text(
                 weather.cityName,

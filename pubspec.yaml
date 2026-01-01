@@ -75,7 +75,7 @@ flutter:
      - assets/lottie/rain.json
      - assets/lottie/snowfall.json
      - assets/lottie/sunny.json
-#     - images/a_dot_ham.jpeg
+     - assets/lottie/fog.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

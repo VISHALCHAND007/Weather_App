@@ -32,7 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Color get getBgColor {
     final desc = _weather?.description.toLowerCase() ?? "";
 
-    if (desc.contains("cloud") || desc.contains("fog")) {
+    if (desc.contains("cloud") ||
+        desc.contains("fog") ||
+        desc.contains("mist")) {
       return Colors.grey.shade400;
     } else if (desc.contains("rain")) {
       return Colors.blueGrey;
@@ -50,7 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Color get bgLightColor {
     final desc = _weather?.description.toLowerCase() ?? "";
 
-    if (desc.contains("cloud") || desc.contains("fog")) {
+    if (desc.contains("cloud") ||
+        desc.contains("fog") ||
+        desc.contains("mist")) {
       return Colors.grey.shade300;
     } else if (desc.contains("rain")) {
       return Colors.blueGrey.shade300;
@@ -105,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _fetchLocation() async {
-    if(!mounted) return;
+    if (!mounted) return;
     setState(() {
       isLoading = true;
     });
@@ -128,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
       print(error);
       scaffoldMessenger.showSnackBar(SnackBar(content: Text("Error:: $error")));
     } finally {
-      if(mounted) {
+      if (mounted) {
         setState(() {
           isLoading = false;
         });

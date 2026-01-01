@@ -99,16 +99,21 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    checkUserLocation();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      checkUserLocation();
+    });
   }
 
   void _fetchLocation() async {
+    if(!mounted) return;
     setState(() {
       isLoading = true;
     });
     final prefs = await SharedPreferences.getInstance();
     try {
-      final _fetchLocation = await LocationHelper().getUserCoordinates();
+      final helper = LocationHelper();
+      await helper.requestPermission();
+      final _fetchLocation = await helper.getUserCoordinates();
       if (_fetchLocation != null) {
         latitude = _fetchLocation.latitude;
         longitude = _fetchLocation.longitude;
@@ -120,11 +125,14 @@ class _HomeScreenState extends State<HomeScreen> {
         fetchWeather();
       }
     } catch (error) {
+      print(error);
       scaffoldMessenger.showSnackBar(SnackBar(content: Text("Error:: $error")));
     } finally {
-      setState(() {
-        isLoading = false;
-      });
+      if(mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
